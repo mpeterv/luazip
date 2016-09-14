@@ -1,5 +1,5 @@
 package = "LuaZip"
-version = "1.2.4-2"
+version = "1.2.4-3"
 source = {
    url = "git://github.com/rjpcomputing/luazip",
    tag = "v1_2_4"
@@ -34,9 +34,9 @@ build = {
    },
    patches = {
 [[
---- luazip/src/luazip.c	2016-07-28 19:34:08.695472558 -0300
-+++ luazip/src/luazip.c	2016-07-28 19:34:13.620472470 -0300
-@@ -21,6 +21,40 @@
+--- luazip/src/luazip.c	2016-09-14 12:26:12.303089553 +0300
++++ luazip/src/luazip.c	2016-09-14 12:22:53.899082530 +0300
+@@ -21,6 +21,42 @@
  #define ZIPINTERNALFILEHANDLE  "lzipInternalFile"
  #define LUAZIP_MAX_EXTENSIONS 32
  
@@ -68,10 +68,12 @@ build = {
 +  lua_pop(L, nup);  /* remove upvalues */
 +}
 +#endif
++#ifndef LUA_COMPAT_OPENLIB
 +static void luaL_openlib(lua_State *L, const char* name, const luaL_Reg* lib, int nup) {
 +  lua_newtable(L); luaL_setfuncs(L, lib, nup);
 +  if (name) { lua_pushvalue(L, -1); lua_setglobal(L, name); }
 +}
++#endif
 +#endif
 +
  static int pushresult (lua_State *L, int i, const char *filename) {
