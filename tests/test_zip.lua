@@ -34,7 +34,13 @@ function test_open ()
 	assert(f2, err)
 	print("zfile:open OK!")
 	print()
-	
+
+	print("Testing zfile:close")
+	local ok, err = f2:close()
+	assert(ok, err)
+	print("zfile:close OK!")
+	print()
+
 	print("Testing reading by number")
 	local c = f1:read(1)
 	while c ~= nil do
