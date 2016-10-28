@@ -51,7 +51,8 @@ void luaL_setfuncs (lua_State *L, const luaL_Reg *l, int nup) {
 #endif
 #ifndef LUA_COMPAT_OPENLIB
 static void luaL_openlib(lua_State *L, const char* name, const luaL_Reg* lib, int nup) {
-  lua_newtable(L); luaL_setfuncs(L, lib, nup);
+  if (name) { lua_newtable(L); lua_insert(L, -(nup + 1)); }
+  luaL_setfuncs(L, lib, nup);
   if (name) { lua_pushvalue(L, -1); lua_setglobal(L, name); }
 }
 #endif
