@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>LuaZip: Reading files inside zip files</title>
-    <link rel="stylesheet" href="http://www.keplerproject.org/doc.css" type="text/css"/>
+    <link rel="stylesheet" href="doc.css" type="text/css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
@@ -12,7 +12,7 @@
 	
 <div id="product">
 	<div id="product_logo">
-        <a href="http://www.keplerproject.org"><img alt="LuaZip logo" src="luazip-128.png"/></a>
+        <a href="https://github.com/rjpcomputing/luazip"><img alt="LuaZip logo" src="luazip-128.png"/></a>
     </div>
 	<div id="product_name"><big><strong>LuaZip</strong></big></div>
 	<div id="product_description">Reading files inside zip files</div>
@@ -30,7 +30,6 @@
 				<li><a href="index.html#download">Download</a></li>
 				<li><a href="index.html#history">History</a></li>
 				<li><a href="index.html#credits">Credits</a></li>
-				<li><a href="index.html#contact">Contact</a></li>
 			</ul>
 		</li>
 		<li><a href="manual.html">Manual</a>
@@ -42,10 +41,10 @@
 			</ul>
 		</li>
 		<li><a href="examples.html">Examples</a></li>
-        <li><a href="http://luaforge.net/projects/luazip/">Project</a>
+        <li><a href="https://github.com/rjpcomputing/luazip">Project</a>
             <ul>
-                <li><a href="http://luaforge.net/tracker/?group_id=8">Bug Tracker</a></li>
-                <li><a href="http://luaforge.net/scm/?group_id=8">CVS</a></li>
+                <li><a href="https://github.com/rjpcomputing/luazip/issues">Bug Tracker</a></li>
+                <li><a href="https://github.com/rjpcomputing/luazip">Git</a></li>
             </ul>
         </li>
 		<li><a href="license.html">License</a></li>
@@ -60,22 +59,26 @@
 used to read files stored inside zip files. The API is very similar to the standard
 Lua I/O library API.</p>
 
-<p>LuaZip is free software and uses the same <a href="license.html">license</a> as Lua 5.1.</p>
+<p>LuaZip is free software and uses the same <a href="license.html">license</a> as Lua 5.x (MIT).</p>
 
 <h2><a name="status"></a>Status</h2>
 
-<p>Current version is 1.2.4. It was developed for Lua 5.0 and 5.1.</p>
+<p>Current version is 1.2.5. It supports Lua 5.1, 5.2, and 5.3.</p>
 
 <h2><a name="download"></a>Download</h2>
 
-<p>LuaZip source can be downloaded from its
-<a href="http://luaforge.net/projects/luazip/files">Lua Forge</a>
-page. If you are using <a href="http://luabinaries.luaforge.net">LuaBinaries</a> 
-a Windows binary version of LuaZip can be found at the same LuaForge page.</p>
+<p>LuaZip can be downloaded via <a href="https://luarocks.org">LuaRocks</a>:
+
+<pre class="example">
+luarocks install luazip
+</pre>
 
 <h2><a name="history"></a>History</h2>
 
 <dl class="history">
+    <dt><strong>Version 1.2.5</strong> [31/Oct/2016]</dt>
+    <dd>Fixed to work on Lua 5.2 and Lua 5.3.</dd>
+
 	<dt><strong>Version 1.2.4</strong> [09/Jun/2014]</dt>
     <dd>Fixed Makefile to work with LuaRocks.</dd>
 	
@@ -91,23 +94,14 @@ a Windows binary version of LuaZip can be found at the same LuaForge page.</p>
     <dt><strong>Version 1.2.0</strong> [01/Dec/2004]</dt>
     <dd></dd>
 
-    <dt><strong><a href="http://www.keplerproject.org/luazip/1.1">Version 1.1.3</a></strong> [25/Jun/2004]</dt>
+    <dt><strong>Version 1.1.3</strong> [25/Jun/2004]</dt>
     <dd>First Public Release</dd>
 </dl>
 
 <h2><a name="credits"></a>Credits</h2>
 
 <p>LuaZip was designed and coded by Danilo Tuler as part of the
-<a href="http://www.keplerproject.org">Kepler Project</a>.</p>
-
-<h2><a name="contact"></a>Contact</h2>
-
-<p>For more information please
-<a href="mailto:info-NO-SPAM-THANKS@keplerproject.org">contact</a> us.
-Comments are welcome!</p>
-
-<p>You can also reach other Kepler developers and users on the Kepler Project
-<a href="http://luaforge.net/mail/?group_id=104">mailing list</a>.</p>
+<a href="https://github.com/keplerproject/">Kepler Project</a>.</p>
 
 </div> <!-- id="content" -->
 
