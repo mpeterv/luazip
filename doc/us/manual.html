@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>LuaZip: Reading files inside zip files</title>
-    <link rel="stylesheet" href="http://www.keplerproject.org/doc.css" type="text/css"/>
+    <link rel="stylesheet" href="doc.css" type="text/css"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
@@ -11,11 +11,11 @@
 <div id="container">
 	
 <div id="product">
-	<div id="product_logo">
-        <a href="http://www.keplerproject.org"><img alt="LuaZip logo" src="luazip-128.png"/></a>
+    <div id="product_logo">
+        <a href="https://github.com/rjpcomputing/luazip"><img alt="LuaZip logo" src="luazip-128.png"/></a>
     </div>
-	<div id="product_name"><big><strong>LuaZip</strong></big></div>
-	<div id="product_description">Reading files inside zip files</div>
+    <div id="product_name"><big><strong>LuaZip</strong></big></div>
+    <div id="product_description">Reading files inside zip files</div>
 </div> <!-- id="product" -->
 
 <div id="main">
@@ -30,7 +30,6 @@
 				<li><a href="index.html#download">Download</a></li>
 				<li><a href="index.html#history">History</a></li>
 				<li><a href="index.html#credits">Credits</a></li>
-				<li><a href="index.html#contact">Contact</a></li>
 			</ul>
 		</li>
 		<li><strong>Manual</strong>
@@ -42,10 +41,10 @@
 			</ul>
 		</li>
 		<li><a href="examples.html">Examples</a></li>
-        <li><a href="http://luaforge.net/projects/luazip/">Project</a>
+        <li><a href="https://github.com/rjpcomputing/luazip">Project</a>
             <ul>
-                <li><a href="http://luaforge.net/tracker/?group_id=8">Bug Tracker</a></li>
-                <li><a href="http://luaforge.net/scm/?group_id=8">CVS</a></li>
+                <li><a href="https://github.com/rjpcomputing/luazip/issues">Bug Tracker</a></li>
+                <li><a href="https://github.com/rjpcomputing/luazip">Git</a></li>
             </ul>
         </li>
 		<li><a href="license.html">License</a></li>
@@ -63,15 +62,15 @@ that can be used to read files stored inside zip files. It uses
 
 <p>The API exposed to Lua is very simple and very similiar to the usual file handling 
 functions provided by the
-<a href="http://www.lua.org/manual/5.0/manual.html#5.6">I/O Lua standard library</a>.
+<a href="http://www.lua.org/manual/5.3/manual.html#6.8">I/O Lua standard library</a>.
 In fact, the API is so similar that parts of this manual are extracted from the Lua manual, 
 copyrighted by Tecgraf, PUC-Rio.</p>
 
 <h2><a name="building"></a>Building</h2>
 
 <p>
-LuaZip could be built to Lua 5.0 or to Lua 5.1.
-In both cases, the language library and headers files for the target version
+LuaZip can be built for Lua 5.1, Lua 5.2, or Lua 5.3.
+In all cases, the language library and headers files for the target version
 must be installed properly.
 </p>
 
@@ -93,8 +92,7 @@ which is not obtained from the installed software.
 <h2><a name="installation"></a>Installation</h2>
 
 <p>The LuaZip compiled binary should be copied to a directory in your
-<a href="http://www.lua.org/manual/5.1/manual.html#pdf-package.cpath">C path</a>.
-Lua 5.0 users should also install <a href="http://www.keplerproject.org/compat">Compat-5.1</a>.</p>
+<a href="http://www.lua.org/manual/5.3/manual.html#pdf-package.cpath">C path</a>.</p>
 
 
 <h2><a name="reference"></a>Reference</h2>
