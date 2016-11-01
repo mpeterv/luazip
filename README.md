@@ -5,4 +5,4 @@ LuaZip is a lightweight Lua extension library used to read files stored inside z
 The API is very similar to the standard Lua I/O library API.
 
 LuaZip is free software and uses the same license as Lua 5.x (MIT).
-Please see docs at `doc/`.
+Please see documentation [online](http://mpeterv.github.io/luazip/) or in `doc/`.
