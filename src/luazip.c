@@ -33,30 +33,14 @@
 #ifndef luaL_optlong
 #define luaL_optlong luaL_optinteger
 #endif
-#if LUA_VERSION_NUM >= 501
-#if LUA_VERSION_NUM == 501
-/* From https://github.com/keplerproject/lua-compat-5.2/blob/v0.3/c-api/compat-5.2.c */
-void luaL_setfuncs (lua_State *L, const luaL_Reg *l, int nup) {
-  luaL_checkstack(L, nup+1, "too many upvalues");
-  for (; l->name != NULL; l++) {  /* fill the table with given functions */
-    int i;
-    lua_pushstring(L, l->name);
-    for (i = 0; i < nup; i++)  /* copy upvalues to the top */
-      lua_pushvalue(L, -(nup + 1));
-    lua_pushcclosure(L, l->func, nup);  /* closure with those upvalues */
-    lua_settable(L, -(nup + 3)); /* table must be below the upvalues, the name and the closure */
+
+static void set_funcs (lua_State *L, const luaL_Reg *lib) {
+  for (; lib->name != NULL; lib++) {
+    lua_pushstring(L, lib->name);
+    lua_pushcfunction(L, lib->func);
+    lua_settable(L, -3);
   }
-  lua_pop(L, nup);  /* remove upvalues */
 }
-#endif
-#ifndef LUA_COMPAT_OPENLIB
-static void luaL_openlib(lua_State *L, const char* name, const luaL_Reg* lib, int nup) {
-  if (name) { lua_newtable(L); lua_insert(L, -(nup + 1)); }
-  luaL_setfuncs(L, lib, nup);
-  if (name) { lua_pushvalue(L, -1); lua_setglobal(L, name); }
-}
-#endif
-#endif
 
 static int pushresult (lua_State *L, int i, const char *filename) {
   if (i) {
@@ -558,20 +542,22 @@ static void createmeta (lua_State *L) {
   lua_pushliteral(L, "__index");
   lua_pushvalue(L, -2);  /* push metatable */
   lua_rawset(L, -3);  /* metatable.__index = metatable */
-  luaL_openlib(L, NULL, flib, 0);
+  set_funcs(L, flib);
 
   luaL_newmetatable(L, ZIPINTERNALFILEHANDLE); /* create new metatable for internal file handles */
   /* internal file methods */
   lua_pushliteral(L, "__index");
   lua_pushvalue(L, -2);  /* push metatable */
   lua_rawset(L, -3);  /* metatable.__index = metatable */
-  luaL_openlib(L, NULL, fflib, 0);
+  set_funcs(L, fflib);
 }
 
 LUAZIP_API int luaopen_zip (lua_State *L) {
   createmeta(L);
-  lua_pushvalue(L, -1);
-  luaL_openlib(L, LUA_ZIPLIBNAME, ziplib, 1);
+  lua_newtable(L);
+  set_funcs(L, ziplib);
   set_info(L);
+  lua_pushvalue(L, -1);
+  lua_setglobal(L, LUA_ZIPLIBNAME);
   return 1;
 }
