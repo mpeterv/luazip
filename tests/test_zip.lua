@@ -15,7 +15,7 @@ end
 require('zip')
 
 function test_open ()
-	local zfile, err = zip.open('luazip.zip')
+	local zfile, err = zip.open('tests/luazip.zip')
 	
 	assert(zfile, err)
 	
@@ -56,22 +56,22 @@ end
 function test_openfile ()
 	print("Testing the openfile magic")
 	
-	local d, err = zip.openfile('a/b/c/d.txt')
+	local d, err = zip.openfile('tests/a/b/c/d.txt')
 	assert(d, err)
 	
-	local e, err = zip.openfile('a/b/c/e.txt')
+	local e, err = zip.openfile('tests/a/b/c/e.txt')
 	assert(e == nil, err)
 	
-	local d2, err = zip.openfile('a2/b2/c2/d2.txt', "ext2")
+	local d2, err = zip.openfile('tests/a2/b2/c2/d2.txt', "ext2")
 	assert(d2, err)
 	
-	local e2, err = zip.openfile('a2/b2/c2/e2.txt', "ext2")
+	local e2, err = zip.openfile('tests/a2/b2/c2/e2.txt', "ext2")
 	assert(e2 == nil, err)
 	
-	local d3, err = zip.openfile('a3/b3/c3/d3.txt', {"ext2", "ext3"})
+	local d3, err = zip.openfile('tests/a3/b3/c3/d3.txt', {"ext2", "ext3"})
 	assert(d3, err)
 	
-	local e3, err = zip.openfile('a3/b3/c3/e3.txt', {"ext2", "ext3"})
+	local e3, err = zip.openfile('tests/a3/b3/c3/e3.txt', {"ext2", "ext3"})
 	assert(e3 == nil, err)
 	
 	print("Smooth magic!")
