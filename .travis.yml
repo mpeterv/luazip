@@ -19,10 +19,14 @@ before_install:
   - source env/bin/activate
 
 install:
-  - luarocks make
+  - luarocks make CFLAGS="-O2 -fPIC --coverage" LIBFLAG="-shared --coverage"
 
 before_script:
   - luarocks install busted
 
 script:
   - busted
+
+after_success:
+  - gcov src/luazip.c
+  - bash <(curl -s https://codecov.io/bash)
