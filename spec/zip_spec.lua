@@ -122,6 +122,29 @@ describe("file object", function()
    end)
 
    describe(":read", function()
+      it("reads whole file", function()
+         local str = file:read("*a")
+         assert.is_equal(([[
+
+LuaZip is a lightweight Lua extension library used to read files stored inside zip files.
+Please see docs at doc/index.html or http://luazip.luaforge.net/
+]]):gsub("\n", "\r\n"), str)
+      end)
+
+      it("reads lines", function()
+         local str = file:read("*l")
+         assert.is_equal("\r", str)
+         str = file:read("*l")
+         assert.is_equal("LuaZip is a lightweight Lua extension library used to read files stored inside zip files.\r", str)
+      end)
+
+      it("reads lines by default", function()
+         local str = file:read()
+         assert.is_equal("\r", str)
+         str = file:read()
+         assert.is_equal("LuaZip is a lightweight Lua extension library used to read files stored inside zip files.\r", str)
+      end)
+
       it("reads given number of bytes", function()
          local str = file:read(2)
          assert.is_equal("\r\n", str)
@@ -129,10 +152,22 @@ describe("file object", function()
          assert.is_equal("Lua", str)
       end)
 
-      it("returns nil on EOF", function()
-         file:read(1000)
-         local str = file:read(1)
+      it("returns nil on EOF when reading given number of bytes", function()
+         local str = file:read(1000)
+         assert.is_equal(([[
+
+LuaZip is a lightweight Lua extension library used to read files stored inside zip files.
+Please see docs at doc/index.html or http://luazip.luaforge.net/
+]]):gsub("\n", "\r\n"), str)
+         str = file:read(1)
          assert.is_nil(str)
+      end)
+
+      it("accepts several modes", function()
+         local str1, str2, str3 = file:read("*l", 6, "*l")
+         assert.is_equal("\r", str1)
+         assert.is_equal("LuaZip", str2)
+         assert.is_equal(" is a lightweight Lua extension library used to read files stored inside zip files.\r", str3)
       end)
    end)
 
