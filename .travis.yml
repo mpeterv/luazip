@@ -28,4 +28,5 @@ script:
   - busted
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - gcov -o src src/luazip.c
+  - bash <(curl -s https://codecov.io/bash) -X gcov -X coveragepy
