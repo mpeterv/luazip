@@ -163,6 +163,14 @@ Please see docs at doc/index.html or http://luazip.luaforge.net/
          assert.is_nil(str)
       end)
 
+      pending("returns nil on EOF and empty string otherwise when reading 0 bytes", function()
+         local str = file:read(0)
+         assert.is_equal("", str)
+         file:read(1000)
+         str = file:read(0)
+         assert.is_nil(str)
+      end)
+
       it("accepts several modes", function()
          local str1, str2, str3 = file:read("*l", 6, "*l")
          assert.is_equal("\r", str1)
