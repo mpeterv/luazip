@@ -21,5 +21,8 @@ before_install:
 install:
   - luarocks make
 
+before_script:
+  - luarocks install busted
+
 script:
-  - lua tests/test_zip.lua
+  - busted
