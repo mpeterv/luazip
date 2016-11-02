@@ -122,6 +122,10 @@ describe("file object", function()
    end)
 
    describe(":read", function()
+      it("throws an error on invalid mode", function()
+         assert.has_error(function() file:read("*x") end, "bad argument #1 to 'read' (invalid format)")
+      end)
+
       it("reads whole file", function()
          local str = file:read("*a")
          assert.is_equal(([[
@@ -169,6 +173,20 @@ Please see docs at doc/index.html or http://luazip.luaforge.net/
          file:read(1000)
          str = file:read(0)
          assert.is_nil(str)
+      end)
+
+      it("returns nil on EOF when reading a line", function()
+         file:read(1000)
+         local str = file:read("*l")
+         assert.is_nil(str)
+         str = file:read()
+         assert.is_nil(str)
+      end)
+
+      it("returns an empty string on EOF when reading whole file", function()
+         file:read(1000)
+         local str = file:read("*a")
+         assert.is_equal("", str)
       end)
 
       it("accepts several modes", function()
