@@ -4,7 +4,7 @@ sudo: false
 addons:
   apt:
     packages:
-      - lizzip-dev
+      - libzzip-dev
 
 env:
   - LUA="lua 5.1"
