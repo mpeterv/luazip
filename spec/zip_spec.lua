@@ -2,6 +2,11 @@
 local zip = require "zip"
 
 describe("zip", function()
+   it("is set as a global", function()
+      assert.truthy(_G.zip)
+      assert.are_same(zip, _G.zip)
+   end)
+
    describe(".open", function()
       it("returns nil, error message on a non-existent zip file", function()
          local zfile, err = zip.open("spec/non-existent.zip")
