@@ -266,6 +266,24 @@ Please see docs at doc/index.html or http://luazip.luaforge.net/
       end)
    end)
 
+   describe(":lines", function()
+      it("returns an iterator reading lines from the file", function()
+         local iter = file:lines()
+         assert.is_function(iter)
+         local lines = {}
+
+         for line in iter do
+            table.insert(lines, line)
+         end
+
+         assert.is_same({
+            "\r",
+            "LuaZip is a lightweight Lua extension library used to read files stored inside zip files.\r",
+            "Please see docs at doc/index.html or http://luazip.luaforge.net/\r"
+         }, lines)
+      end)
+   end)
+
    describe(":close", function()
       it("returns true on success", function()
          local ok = file:close()
