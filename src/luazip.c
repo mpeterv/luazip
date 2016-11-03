@@ -351,10 +351,23 @@ static int read_number (lua_State *L, ZZIP_FILE *f) {
 */
 
 static int test_eof (lua_State *L, ZZIP_FILE *f) {
-  /* TODO */
-	(void) L;
-	(void) f;
-  return 1;
+  int no_eof;
+
+  if (zzip_file_real(f)) {
+    char c;
+    no_eof = zzip_read(f, &c, 1) != 0;
+
+    if (no_eof) {
+      zzip_seek(f, -1, SEEK_CUR);
+    }
+  } else {
+    ZZIP_STAT z_stat;
+    zzip_file_stat(f, &z_stat);
+    no_eof = zzip_tell(f) != z_stat.st_size;
+  }
+
+  lua_pushliteral(L, "");
+  return no_eof;
 }
 
 static int read_line (lua_State *L, ZZIP_FILE *f) {

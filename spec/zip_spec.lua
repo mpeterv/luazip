@@ -206,11 +206,15 @@ Please see docs at doc/index.html or http://luazip.luaforge.net/
          assert.is_nil(str)
       end)
 
-      pending("returns nil on EOF and empty string otherwise when reading 0 bytes", function()
+      it("returns nil on EOF and empty string otherwise when reading 0 bytes", function()
          local str = file:read(0)
          assert.is_equal("", str)
+         str = file:read(2)
+         assert.is_equal("\r\n", str)
          file:read(1000)
          str = file:read(0)
+         assert.is_nil(str)
+         str = file:read(1)
          assert.is_nil(str)
       end)
 
