@@ -121,6 +121,20 @@ describe("zip file object", function()
       end)
    end)
 
+   describe("__tostring", function()
+      it("returns 'zip file (address) on an open file", function()
+         local str = tostring(zfile)
+         assert.matches("^zip file %(.+%)$", str)
+      end)
+
+      it("returns 'zip file (closed) on a closed file", function()
+         zfile:close()
+         local str = tostring(zfile)
+         zfile = nil
+         assert.is_equal("zip file (closed)", str)
+      end)
+   end)
+
    describe(":close", function()
       it("returns true on success", function()
          local ok = zfile:close()
@@ -306,6 +320,20 @@ Please see docs at doc/index.html or http://luazip.luaforge.net/
             "LuaZip is a lightweight Lua extension library used to read files stored inside zip files.\r",
             "Please see docs at doc/index.html or http://luazip.luaforge.net/\r"
          }, lines)
+      end)
+   end)
+
+   describe("__tostring", function()
+      it("returns 'file in zip file (address) on an open file", function()
+         local str = tostring(file)
+         assert.matches("^file in zip file %(.+%)$", str)
+      end)
+
+      it("returns 'file in zip file (closed) on a closed file", function()
+         file:close()
+         local str = tostring(file)
+         file = nil
+         assert.is_equal("file in zip file (closed)", str)
       end)
    end)
 
