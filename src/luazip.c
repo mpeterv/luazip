@@ -452,35 +452,22 @@ static int ff_read (lua_State *L) {
   return g_read(L, tointernalfile(L, 1), 2);
 }
 
-static int zip_readline (lua_State *L);
+static int zip_readline (lua_State *L) {
+  ZZIP_FILE *f = *(ZZIP_FILE **)lua_touserdata(L, lua_upvalueindex(1));
+  if (f == NULL)  /* file is already closed? */
+    luaL_error(L, "file is already closed");
+  return read_line(L, f);
+}
 
 static void aux_lines (lua_State *L, int idx, int close) {
-  lua_pushliteral(L, ZIPINTERNALFILEHANDLE);
-  lua_rawget(L, LUA_REGISTRYINDEX);
   lua_pushvalue(L, idx);
-  lua_pushboolean(L, close);  /* close/not close file when finished */
-  lua_pushcclosure(L, zip_readline, 3);
+  lua_pushcclosure(L, zip_readline, 1);
 }
 
 static int ff_lines (lua_State *L) {
   tointernalfile(L, 1);  /* check that it's a valid file handle */
   aux_lines(L, 1, 0);
   return 1;
-}
-
-static int zip_readline (lua_State *L) {
-  ZZIP_FILE *f = *(ZZIP_FILE **)lua_touserdata(L, lua_upvalueindex(2));
-  if (f == NULL)  /* file is already closed? */
-    luaL_error(L, "file is already closed");
-  if (read_line(L, f)) return 1;
-  else {  /* EOF */
-    if (lua_toboolean(L, lua_upvalueindex(3))) {  /* generator created file? */
-      lua_settop(L, 0);
-      lua_pushvalue(L, lua_upvalueindex(2));
-      aux_close(L);  /* close it */
-    }
-    return 0;
-  }
 }
 
 static int ff_seek (lua_State *L) {
