@@ -145,10 +145,12 @@ describe("zip file object", function()
 end)
 
 describe("file object", function()
+   local zfile
    local file
 
    before_each(function()
-      local zfile, err = zip.open("spec/luazip.zip")
+      local err
+      zfile, err = zip.open("spec/luazip.zip")
       assert.is_truthy(zfile, err)
       file, err = zfile:open("README")
       assert.is_truthy(file, err)
@@ -157,6 +159,10 @@ describe("file object", function()
    after_each(function()
       if file then
          file:close()
+      end
+
+      if zfile then
+         zfile:close()
       end
    end)
 
