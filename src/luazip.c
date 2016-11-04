@@ -306,33 +306,6 @@ static int ff_gc (lua_State *L) {
   return 0;
 }
 
-static int zzip_getc (ZZIP_FILE *f)
-{
-  char c;
-  return (zzip_fread(&c, sizeof(char), 1, f) == 0) ? EOF : (int)c;
-}
-
-static char* zzip_fgets(char *str, int size, ZZIP_FILE *stream)
-{
-  int c, i;
-
-	for (i = 0; i < size-1; i++)
-	{
-    c = zzip_getc(stream);
-		if (EOF == c)
-			return NULL;
-		str[i]=c;
-		if ('\n' == c)
-		{
-      str[i++]='\n';
-			break;
-		}
-	}
-	str[i] = '\0';
-
-	return str;
-}
-
 static int test_eof (lua_State *L, ZZIP_FILE *f) {
   int no_eof;
 
@@ -355,21 +328,24 @@ static int test_eof (lua_State *L, ZZIP_FILE *f) {
 
 static int read_line (lua_State *L, ZZIP_FILE *f) {
   luaL_Buffer b;
+  int read_something = 0;
   luaL_buffinit(L, &b);
+
   for (;;) {
-    size_t l;
-    char *p = luaL_prepbuffer(&b);
-    if (zzip_fgets(p, LUAL_BUFFERSIZE, f) == NULL) {  /* eof? */
-      luaL_pushresult(&b);  /* close buffer */
-      return (lua_strlen(L, -1) > 0);  /* check whether read something */
-    }
-    l = strlen(p);
-    if (p[l-1] != '\n')
-      luaL_addsize(&b, l);
-    else {
-      luaL_addsize(&b, l - 1);  /* do not include `eol' */
-      luaL_pushresult(&b);  /* close buffer */
-      return 1;  /* read at least an `eol' */
+    int i;
+    char *buff = luaL_prepbuffer(&b);
+
+    for (i = 0; i < LUAL_BUFFERSIZE; i++) {
+      int c = '\0';
+
+      if ((zzip_read(f, &c, 1) != 1) || (c == '\n')) {
+        luaL_addsize(&b, i);
+        luaL_pushresult(&b);
+        return read_something || (c == '\n');
+      }
+
+      buff[i] = c;
+      read_something = 1;
     }
   }
 }

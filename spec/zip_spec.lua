@@ -184,7 +184,7 @@ last line]]):gsub("\n", "\r\n"), str)
                assert.is_equal("LuaZip is a lightweight Lua extension library used to read files stored inside zip files.\r", str)
             end)
 
-            pending("reads lines by default", function()
+            it("reads lines by default", function()
                local str = file:read()
                assert.is_equal("\r", str)
                str = file:read()
@@ -314,7 +314,7 @@ last line]]):gsub("\n", "\r\n"), str)
          end)
 
          describe(":lines", function()
-            pending("returns an iterator reading lines from the file", function()
+            it("returns an iterator reading lines from the file", function()
                local iter = file:lines()
                assert.is_function(iter)
                local lines = {}
