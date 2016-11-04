@@ -322,7 +322,7 @@ static char* zzip_fgets(char *str, int size, ZZIP_FILE *stream)
 		if (EOF == c)
 			return NULL;
 		str[i]=c;
-		if (('\n' == c)/* || ('\r' == c)*/)
+		if ('\n' == c)
 		{
       str[i++]='\n';
 			break;
@@ -332,23 +332,6 @@ static char* zzip_fgets(char *str, int size, ZZIP_FILE *stream)
 
 	return str;
 }
-
-/* no support to read numbers
-static int zzip_fscanf (ZZIP_FILE *f, const char *format, ...)
-{
-  // TODO
-  return 0;
-}
-
-static int read_number (lua_State *L, ZZIP_FILE *f) {
-  lua_Number d;
-  if (zzip_fscanf(f, LUA_NUMBER_SCAN, &d) == 1) {
-    lua_pushnumber(L, d);
-    return 1;
-  }
-  else return 0;  // read fails
-}
-*/
 
 static int test_eof (lua_State *L, ZZIP_FILE *f) {
   int no_eof;
@@ -494,7 +477,6 @@ static const luaL_reg ziplib[] = {
   {"open", zip_open},
   {"close", zip_close},
   {"type", zip_type},
-//  {"files", io_files},
   {"openfile", zip_openfile},
   {NULL, NULL}
 };
@@ -515,8 +497,6 @@ static const luaL_reg fflib[] = {
   {"lines", ff_lines},
   {"__gc", ff_gc},
   {"__tostring", ff_tostring},
-/*  {"flush", ff_flush},
-  {"write", ff_write},*/
   {NULL, NULL}
 };
 
