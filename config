@@ -22,7 +22,6 @@ LIB_OPTION= -shared #for Linux
 # Lua version number (first and second digits of target version)
 LUA_VERSION_NUM= 500
 LIBNAME= $T.so.$V
-COMPAT_DIR= ../compat/src
 
 # Compilation directives
 WARN= -O2 -Wall -fPIC -W -Waggregate-return -Wcast-align -Wmissing-prototypes -Wnested-externs -Wshadow -Wwrite-strings
