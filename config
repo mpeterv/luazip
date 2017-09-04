@@ -4,7 +4,7 @@
 PREFIX = /usr/local
 
 # Minor Lua version number (1 for Lua 5.1 and LuaJIT, 2 for Lua 5.2, 3 for Lua 5.3)
-LUA_VERSION_MINOR= 1
+LUA_VERSION_MINOR= 3
 
 # System's libraries directory (where binary libraries are installed)
 LUA_LIBDIR= $(PREFIX)/lib/lua/5.$(LUA_VERSION_MINOR)
