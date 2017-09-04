@@ -27,5 +27,3 @@ WARN= -Wall -Wextra
 INCS= -I$(LUA_INC) -I$(ZZLIB_INC)
 CFLAGS= -O2 -fPIC $(WARN) $(INCS)
 CC= gcc
-
-# $Id: config,v 1.7 2007-10-29 22:59:10 carregal Exp $

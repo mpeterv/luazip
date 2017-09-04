@@ -26,5 +26,3 @@ clean:
 	del src\*.obj
     del src\zip.exp
     del src\zip.lib
-
-# $Id: makefile.win,v 1.2 2007-06-13 23:41:54 carregal Exp $

@@ -4,8 +4,6 @@
 
  Author: Danilo Tuler
  Copyright (c) 2003-2007 Kepler Project
-
- $Id: luazip.c,v 1.11 2007-06-18 18:47:05 carregal Exp $
 */
 
 #include <string.h>
