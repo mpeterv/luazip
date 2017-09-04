@@ -415,14 +415,14 @@ static int zip_readline (lua_State *L) {
   return read_line(L, f);
 }
 
-static void aux_lines (lua_State *L, int idx, int close) {
+static void aux_lines (lua_State *L, int idx) {
   lua_pushvalue(L, idx);
   lua_pushcclosure(L, zip_readline, 1);
 }
 
 static int ff_lines (lua_State *L) {
   tointernalfile(L, 1);  /* check that it's a valid file handle */
-  aux_lines(L, 1, 0);
+  aux_lines(L, 1);
   return 1;
 }
 
