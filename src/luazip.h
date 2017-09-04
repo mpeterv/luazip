@@ -1,9 +1,11 @@
 /*
  LuaZip - Reading files inside zip files.
- http://www.keplerproject.org/luazip/
+ https://github.com/mpeterv/luazip
 
  Author: Danilo Tuler
+ Maintainer: Peter Melnichenko
  Copyright (c) 2003-2007 Kepler Project
+ Copyright (c) 2016-2017 Peter Melnichenko
 */
 
 #ifndef luazip_h
