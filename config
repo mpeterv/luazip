@@ -3,11 +3,14 @@
 # Default prefix
 PREFIX = /usr/local
 
+# Minor Lua version number (1 for Lua 5.1 and LuaJIT, 2 for Lua 5.2, 3 for Lua 5.3)
+LUA_VERSION_MINOR= 1
+
 # System's libraries directory (where binary libraries are installed)
-LUA_LIBDIR= $(PREFIX)/lib/lua/5.1
+LUA_LIBDIR= $(PREFIX)/lib/lua/5.$(LUA_VERSION_MINOR)
 
 # System's lua directory (where Lua libraries are installed)
-LUA_DIR= $(PREFIX)/share/lua/5.1
+LUA_DIR= $(PREFIX)/share/lua/5.$(LUA_VERSION_MINOR)
 
 # Lua includes directory
 LUA_INC= $(PREFIX)/include
@@ -19,14 +22,10 @@ ZZLIB_INC= /usr/local/include
 LIB_OPTION= -shared #for Linux
 #LIB_OPTION= -bundle -undefined dynamic_lookup #for MacOS X
 
-# Lua version number (first and second digits of target version)
-LUA_VERSION_NUM= 500
-LIBNAME= $T.so.$V
-
 # Compilation directives
-WARN= -O2 -Wall -fPIC -W -Waggregate-return -Wcast-align -Wmissing-prototypes -Wnested-externs -Wshadow -Wwrite-strings
-INCS= -I$(LUA_INC) -I$(ZZLIB_INC) -I$(COMPAT_DIR)
-CFLAGS= $(WARN) $(INCS)
+WARN= -Wall -Wextra
+INCS= -I$(LUA_INC) -I$(ZZLIB_INC)
+CFLAGS= -O2 -fPIC $(WARN) $(INCS)
 CC= gcc
 
 # $Id: config,v 1.7 2007-10-29 22:59:10 carregal Exp $
