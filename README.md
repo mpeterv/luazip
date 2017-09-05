@@ -1,4 +1,4 @@
-# LuaZip 1.2.6
+# LuaZip 1.2.7
 
 [![Build Status](https://travis-ci.org/mpeterv/luazip.svg?branch=master)](https://travis-ci.org/mpeterv/luazip)
 [![codecov](https://codecov.io/gh/mpeterv/luazip/branch/master/graph/badge.svg)](https://codecov.io/gh/mpeterv/luazip)

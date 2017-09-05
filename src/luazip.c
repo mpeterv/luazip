@@ -485,7 +485,7 @@ static void set_info (lua_State *L) {
 	lua_pushliteral (L, "Reading files inside zip files");
 	lua_settable (L, -3);
 	lua_pushliteral (L, "_VERSION");
-	lua_pushliteral (L, "LuaZip 1.2.6");
+	lua_pushliteral (L, "LuaZip 1.2.7");
 	lua_settable (L, -3);
 }
 
